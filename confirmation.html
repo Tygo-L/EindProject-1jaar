@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style/styleConfirmation.css">
+    <title>Order Confirmed - GrooveSpinners</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rubik+Mono+One&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "vinyl-brown": "#3E2723",
+              "vinyl-cream": "#FFF8E1",
+              "vinyl-orange": "#FF8F00",
+              "vinyl-ochre": "#F57F17",
+              "vinyl-mint": "#A5D6A7",
+            },
+            fontFamily: {
+              retro: ["Press Start 2P", "monospace"],
+              mono: ["Rubik Mono One", "monospace"],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="min-h-screen flex items-center justify-center text-vinyl-cream">
+    <div class="text-center max-w-2xl mx-auto px-4">
+      <div class="vinyl-record w-32 h-32 mx-auto mb-8 spinning"></div>
+
+      <h1 class="font-retro text-4xl md:text-6xl mb-6 text-vinyl-mint">Order Confirmed!</h1>
+
+      <p class="text-xl md:text-2xl mb-4 text-vinyl-cream/90">🎵 Your record is on its way to spin again! 🎵</p>
+
+      <div class="bg-vinyl-cream/10 backdrop-blur-md rounded-2xl p-8 mb-8">
+        <h2 class="font-mono text-2xl mb-4 text-vinyl-orange">Order Details</h2>
+        <div id="orderSummary" class="text-left space-y-2"></div>
+      </div>
+
+      <p class="text-lg mb-8 text-vinyl-cream/80">
+        Thank you for choosing GrooveSpinners! Your vinyl collection just got a little more groovy.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="index.html" class="cassette-btn px-8 py-4 rounded-lg font-mono inline-block">
+          <i class="fas fa-home mr-2"></i>Back to Shop
+        </a>
+        <button onclick="window.print()" class="cassette-btn px-8 py-4 rounded-lg font-mono">
+          <i class="fas fa-print mr-2"></i>Print Receipt
+        </button>
+      </div>
+
+      <div class="mt-12 bg-vinyl-orange/20 rounded-2xl p-6">
+        <h3 class="font-mono text-lg mb-2 text-vinyl-orange">🎧 Did You Know?</h3>
+        <p class="text-vinyl-cream/90" id="randomFact">
+          The longest-playing vinyl record ever made was 90 minutes long and required a special turntable!
+        </p>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const lastOrder = JSON.parse(localStorage.getItem("lastOrder") || "{}");
+        const orderSummary = document.getElementById("orderSummary");
+
+        if (lastOrder.items && lastOrder.items.length > 0) {
+          let summaryHTML = `
+                    <p><strong>Order #:</strong> ${lastOrder.id}</p>
+                    <p><strong>Date:</strong> ${new Date(lastOrder.date).toLocaleDateString()}</p>
+                    <p><strong>Items:</strong></p>
+                    <ul class="ml-4 space-y-1">
+                `;
+
+          lastOrder.items.forEach((item) => {
+            summaryHTML += `<li>• ${item.title} by ${item.artist} - €${item.price}</li>`;
+          });
+
+          summaryHTML += `
+                    </ul>
+                    <p class="text-xl font-bold mt-4"><strong>Total: €${lastOrder.total}</strong></p>
+                `;
+
+          orderSummary.innerHTML = summaryHTML;
+        }
+
+        const facts = [
+          "The longest-playing vinyl record ever made was 90 minutes long and required a special turntable!",
+          "Vinyl records are made from polyvinyl chloride (PVC), which is why they're called 'vinyl'.",
+          "The first vinyl records were introduced in 1930 by RCA Victor.",
+          "A standard LP (Long Play) record spins at 33⅓ RPM and can hold about 22 minutes per side.",
+          "The largest vinyl record collection belongs to Zero Freitas from Brazil with over 6 million records!",
+          "Vinyl sales have been growing for 15 consecutive years, outselling CDs since 2020.",
+          "The most expensive vinyl record ever sold was Wu-Tang Clan's 'Once Upon a Time in Shaolin' for $2 million.",
+        ];
+
+        const randomFact = facts[Math.floor(Math.random() * facts.length)];
+        document.getElementById("randomFact").textContent = randomFact;
+      });
+    </script>
+  </body>
+</html>

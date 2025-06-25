@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GrooveSpinners</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rubik+Mono+One&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "vinyl-brown": "#3E2723",
+              "vinyl-cream": "#FFF8E1",
+              "vinyl-orange": "#FF8F00",
+              "vinyl-ochre": "#F57F17",
+              "vinyl-mint": "#A5D6A7",
+            },
+            fontFamily: {
+              retro: ["Press Start 2P", "monospace"],
+              mono: ["Rubik Mono One", "monospace"],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="min-h-screen text-vinyl-brown">
+    <header class="bg-vinyl-cream/90 backdrop-blur-md shadow-lg sticky top-0 z-50">
+      <div class="container mx-auto px-4 py-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-4">
+            <div class="vinyl-record w-12 h-12"></div>
+            <a href="#" class="font-retro text-2xl text-vinyl-brown">GrooveSpinners</a>
+          </div>
+
+          <div class="flex-1 max-w-md mx-8">
+            <div class="relative">
+              <input
+                type="text"
+                id="searchInput"
+                placeholder="Search vinyl records..."
+                class="w-full px-4 py-2 rounded-full border-2 border-vinyl-orange focus:outline-none focus:border-vinyl-ochre"
+              />
+              <i class="fas fa-search absolute right-3 top-3 text-vinyl-orange"></i>
+            </div>
+          </div>
+
+          <div class="flex items-center space-x-4">
+            <button id="cartBtn" class="cassette-btn px-4 py-2 rounded-lg font-mono relative">
+              <i class="fas fa-shopping-cart mr-2"></i>
+              Cart (<span id="cartCount">0</span>)
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="py-16 text-center">
+      <div class="container mx-auto px-4">
+        <h2 class="font-retro text-4xl md:text-6xl text-vinyl-cream mb-4">Spin Your Story</h2>
+        <p class="text-vinyl-cream/80 text-lg md:text-xl mb-8 max-w-2xl mx-auto">
+          Discover rare gems and timeless classics in our curated collection of vintage vinyl records
+        </p>
+
+        <div id="randomPick" class="bg-vinyl-cream/10 backdrop-blur-md rounded-2xl p-6 max-w-md mx-auto mb-8">
+          <h3 class="font-mono text-vinyl-mint text-lg mb-4">Random Pick of the Day</h3>
+          <div id="randomPickContent" class="text-vinyl-cream"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-8 bg-vinyl-cream/5 backdrop-blur-sm">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-wrap justify-center gap-4">
+          <button class="filter-btn cassette-btn px-4 py-2 rounded-lg font-mono" data-filter="all">All</button>
+          <button class="filter-btn cassette-btn px-4 py-2 rounded-lg font-mono" data-filter="Rock">Rock</button>
+          <button class="filter-btn cassette-btn px-4 py-2 rounded-lg font-mono" data-filter="Jazz">Jazz</button>
+          <button class="filter-btn cassette-btn px-4 py-2 rounded-lg font-mono" data-filter="Rap">Rap</button>
+          <button class="filter-btn cassette-btn px-4 py-2 rounded-lg font-mono" data-filter="Blues">Blues</button>
+          <button class="filter-btn cassette-btn px-4 py-2 rounded-lg font-mono" data-filter="Folk">Folk</button>
+          <button class="filter-btn cassette-btn px-4 py-2 rounded-lg font-mono" data-filter="Metal">Metal</button>
+          <button class="filter-btn cassette-btn px-4 py-2 rounded-lg font-mono" data-filter="Electronic">
+            Electronic
+          </button>
+          <button class="filter-btn cassette-btn px-4 py-2 rounded-lg font-mono" data-filter="Accessory">
+            Accessories
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <main class="py-16">
+      <div class="container mx-auto px-4">
+        <div id="productsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>
+      </div>
+    </main>
+
+    <div id="cartModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden z-50">
+      <div class="flex items-center justify-center min-h-screen p-4">
+        <div class="bg-vinyl-cream rounded-2xl p-8 max-w-2xl w-full max-h-[80vh] overflow-y-auto">
+          <div class="flex justify-between items-center mb-6">
+            <h3 class="font-retro text-2xl text-vinyl-brown">Your Cart</h3>
+            <button id="closeCart" class="text-vinyl-brown hover:text-vinyl-orange">
+              <i class="fas fa-times text-2xl"></i>
+            </button>
+          </div>
+          <div id="cartItems" class="space-y-4 mb-6"></div>
+          <div class="border-t pt-4">
+            <div class="flex justify-between items-center mb-4">
+              <span class="font-mono text-xl">Total: €<span id="cartTotal">0.00</span></span>
+            </div>
+            <div class="flex gap-4">
+              <button id="clearCart" class="cassette-btn px-6 py-3 rounded-lg font-mono flex-1">Clear Cart</button>
+              <button
+                id="checkout"
+                class="bg-vinyl-orange hover:bg-vinyl-ochre text-white px-6 py-3 rounded-lg font-mono flex-1"
+              >
+                Order Now
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="productModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden z-50">
+      <div class="flex items-center justify-center min-h-screen p-4">
+        <div class="bg-vinyl-cream rounded-2xl p-8 max-w-4xl w-full max-h-[80vh] overflow-y-auto">
+          <div id="productModalContent"></div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="bg-vinyl-brown text-vinyl-cream py-20">
+        <div class="container mx-auto px-4 text-center">
+          <p class="text-sm">© 2025 GrooveSpinners. All rights reserved.</p>
+          <p class="text-xs mt-2">Made with passion by Tygo</p>
+        </div>
+      </div>
+    </footer>
+    <script src="js/storage.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>

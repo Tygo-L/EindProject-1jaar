@@ -1,0 +1,42 @@
+body {
+  background: linear-gradient(45deg, #3e2723 0%, #5d4037 50%, #3e2723 100%);
+  background-attachment: fixed;
+}
+.cassette-btn {
+  background: linear-gradient(145deg, #f0f0f0, #d0d0d0);
+  border: 2px solid #999;
+  color: #222;
+  box-shadow:
+    2px 2px 8px #bbb,
+    inset 2px 2px 4px rgba(255,255,255,0.8),
+    inset -2px -2px 4px rgba(0,0,0,0.2);
+  transition: box-shadow 0.1s, transform 0.1s;
+  position: relative;
+}
+.cassette-btn:hover {
+  background: linear-gradient(145deg, #e0e0e0, #c0c0c0);
+}
+.cassette-btn:active {
+  box-shadow:
+    1px 1px 2px #aaa,
+    inset 2px 2px 8px rgba(0,0,0,0.15),
+    inset -2px -2px 8px rgba(255,255,255,0.5);
+  transform: translateY(2px);
+  color: #111;
+}
+.vinyl-record {
+  background: radial-gradient(circle at 50% 50%, #1a1a1a 15%, #333 16%, #1a1a1a 45%, #000 46%);
+  border-radius: 50%;
+  position: relative;
+}
+.vinyl-record::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  background: #ff6b6b;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
