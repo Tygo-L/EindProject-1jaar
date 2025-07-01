@@ -12,17 +12,7 @@ body {
     ),
     repeating-conic-gradient(from 0deg at 50% 50%, transparent 0deg, rgba(0, 0, 0, 0.05) 1deg, transparent 2deg);
 }
-.spinning {
-  animation: spin 3s linear infinite;
-}
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+
 .vinyl-record {
   background: radial-gradient(circle at 50% 50%, #1a1a1a 15%, #333 16%, #1a1a1a 45%, #000 46%);
   border-radius: 50%;
@@ -60,6 +50,7 @@ body {
     inset -2px -2px 8px rgba(255,255,255,0.5);
   transform: translateY(2px);
 }
+
 .product-card {
   background: rgba(255, 248, 225, 0.95);
   backdrop-filter: blur(10px);
