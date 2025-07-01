@@ -24,7 +24,7 @@ function loadProducts() {
     grid.innerHTML = products.map(product => `
         <div class="product-card rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300">
             <div class="relative mb-4">
-                <img src="${product.image}" alt="${product.title}" 
+                <img src="${product.image.startsWith('svg/') ? '../' + product.image : product.image}" alt="${product.title}" 
                      class="w-full h-64 object-cover rounded-lg cursor-pointer"
                      onclick="showProductDetail(${product.id})">
                 <div class="absolute top-2 right-2">
@@ -170,7 +170,7 @@ function showProductDetail(productId) {
         
         <div class="grid md:grid-cols-2 gap-8">
             <div>
-                <img src="${product.image}" alt="${product.title}" 
+                <img src="${product.image.startsWith('svg/') ? '../' + product.image : product.image}" alt="${product.title}" 
                      class="w-full rounded-2xl shadow-lg">
             </div>
             
@@ -219,7 +219,7 @@ function loadRandomPick() {
     if (randomProduct && content) {
         content.innerHTML = `
             <div class="text-center">
-                <img src="${randomProduct.image}" alt="${randomProduct.title}" 
+                <img src="${randomProduct.image.startsWith('svg/') ? '../' + randomProduct.image : randomProduct.image}" alt="${randomProduct.title}" 
                      class="w-24 h-24 mx-auto rounded-lg mb-3 cursor-pointer"
                      onclick="showProductDetail(${randomProduct.id})">
                 <h4 class="font-mono font-bold cursor-pointer hover:text-vinyl-orange"

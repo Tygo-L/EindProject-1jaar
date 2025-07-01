@@ -34,7 +34,7 @@ class AdminManager {
 
         grid.innerHTML = products.map(product => `
             <div class="bg-white rounded-lg p-4 shadow-md">
-                <img src="${product.image}" alt="${product.title}" class="w-full h-32 object-cover rounded mb-3">
+                <img src="${product.image.startsWith('svg/') ? '../' + product.image : product.image}" alt="${product.title}" class="w-full h-32 object-cover rounded mb-3">
                 <h3 class="font-mono font-bold text-sm mb-1">${product.title}</h3>
                 <p class="text-xs text-gray-600 mb-1">${product.artist}</p>
                 <p class="text-xs text-gray-500 mb-2">${product.genre} • ${product.year}</p>

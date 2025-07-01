@@ -1,7 +1,7 @@
 // The ProductManager class organizes all product - related logic for the webshop.
 // It handles loading, filtering, searching, adding, updating, and deleting products, as well as saving changes to storage.
 // By using this class, the code stays organized and makes it easy to manage products throughout the site.
-// even een uitlegje van het internet.
+// even een uitlegje van het internet omdat ik het anders vergeet.
 
 class ProductManager {
     constructor() {
